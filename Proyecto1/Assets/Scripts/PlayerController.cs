@@ -42,10 +42,10 @@ public class PlayerController : MonoBehaviour {
         if (characterController.isGrounded)
         {
             verticalVelocity = -gravity * Time.deltaTime;
-            if (Input.GetAxis("Jump") > 0)
+            /*if (Input.GetAxis("Jump") > 0)
             {
                 verticalVelocity = jumpForce;
-            }
+            }*/
         }
         else
         {
@@ -68,14 +68,18 @@ public class PlayerController : MonoBehaviour {
         if (body == null || body.isKinematic)
             return;
 
+        if (hit.gameObject.tag == "Enemy")
+        {
+            GameManager.Instance.GameOver();
+        }
         //body.AddForceAtPosition(-hit.normal * weight, hit.point);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy")
         {
             GameManager.Instance.GameOver();
         }
-    }
+    }*/
 }

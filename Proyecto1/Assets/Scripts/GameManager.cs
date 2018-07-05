@@ -84,6 +84,11 @@ public class GameManager : MonoBehaviour {
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                PauseGame();
+            }
+
+            if (Input.GetKeyDown(KeyCode.CapsLock))
+            {
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.isPlaying = false; //si le damos al botón de Quit en Unity, parará de jugar
 #endif
@@ -125,15 +130,25 @@ public class GameManager : MonoBehaviour {
         gameFinished = true;
     }
 
+    #region Pause Methods
+    public void PauseGame()
+    {
+        menuPanel.SetActive(true);
+        Time.timeScale = 0;
+    }
+    #endregion
+
     #region Game States
     public void ShowVictoryScreen()
     {
-
+        victoryPanel.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void ShowDefeatScreen()
     {
-        Debug.Log("Dead");
+        defeatPanel.SetActive(true);
+        Time.timeScale = 0;
     }
     #endregion
 }
