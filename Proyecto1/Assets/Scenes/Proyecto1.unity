@@ -112,7 +112,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 20bad1b0509549141bd1b0a976642832, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: c13450cfe5347ed4a974194871549bcc, type: 2}
 --- !u!1 &18171022
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,8 +2384,6 @@ GameObject:
   m_Component:
   - component: {fileID: 376341146}
   - component: {fileID: 376341147}
-  - component: {fileID: 376341150}
-  - component: {fileID: 376341148}
   - component: {fileID: 376341149}
   m_Layer: 0
   m_Name: Player
@@ -2422,27 +2420,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   rotationSpeed: 10
---- !u!195 &376341148
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 376341145}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 15
-  avoidancePriority: 50
-  m_AngularSpeed: 1200
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  gravityMultiplier: 1
+  gravity: 10
+  verticalVelocity: 0
+  jumpForce: 7
 --- !u!143 &376341149
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2459,20 +2440,7 @@ CharacterController:
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!136 &376341150
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 376341145}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.22, z: 0}
 --- !u!1 &381051906
 GameObject:
   m_ObjectHideFlags: 0
@@ -4110,6 +4078,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   rotationSpeed: 10
+  gravityMultiplier: 1
+  gravity: 10
+  verticalVelocity: 0
+  jumpForce: 7
 --- !u!1 &628440466
 GameObject:
   m_ObjectHideFlags: 0
@@ -12561,7 +12533,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1978182737}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.21, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children:
   - {fileID: 846078386}

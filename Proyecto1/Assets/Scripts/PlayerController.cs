@@ -8,7 +8,10 @@ public class PlayerController : MonoBehaviour {
     [Header("\t--Public Variables--")]
     public float movementSpeed = 100;
     public float rotationSpeed = 50;
-
+    public float gravityMultiplier = 1.0f;
+    public float gravity = 10.0f;
+    public float verticalVelocity;
+    public float jumpForce = 7.0f;
 
     #endregion
     //Player Movement
@@ -16,6 +19,7 @@ public class PlayerController : MonoBehaviour {
     private float x_input;
     private float z_input;
     private Vector3 movement;
+    private Vector3 moveVector;
     private CollisionFlags colisionesDelPlayer = CollisionFlags.None;
 
 
@@ -35,9 +39,23 @@ public class PlayerController : MonoBehaviour {
 
         movement = new Vector3(x_input, 0f, z_input);
 
+        if (characterController.isGrounded)
+        {
+            verticalVelocity = -gravity * Time.deltaTime;
+            if (Input.GetAxis("Jump") > 0)
+            {
+                verticalVelocity = jumpForce;
+            }
+        }
+        else
+        {
+            verticalVelocity -= gravity * Time.deltaTime;
+        }
+        Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
+
         colisionesDelPlayer = characterController.collisionFlags;
 
-        characterController.Move(movement * Time.deltaTime);
+        characterController.Move((movement + moveVector) * Time.deltaTime);
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
