@@ -13,6 +13,12 @@ public class GameManager : MonoBehaviour {
 
     [Header("Menu Variables")]
     public GameObject menuPanel;
+    public GameObject restartConfirmationPanel;
+    public GameObject settingsPanel;
+    public GameObject menuConfirmationPanel;
+    public GameObject quitConfirmationPanel;
+    public bool confirmationPanelOpen = false;
+    public bool finalPanelActive = false;
 
     [Header("Victory Panel Variables")]
     public GameObject victoryPanel;
@@ -32,6 +38,7 @@ public class GameManager : MonoBehaviour {
     private bool gameFinished = false;
     private bool isPlaying = false;
     private bool playerIsDead = false;
+    private bool isGamePaused = false;
 
     public static GameManager Instance
     {
@@ -82,11 +89,16 @@ public class GameManager : MonoBehaviour {
             DisplayTime();
             LockCursor();
 
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (isGamePaused)
+            {
+                PauseActions();
+            }
+            else if (InputManager.Instance.EscapeHasBeenPressed() && !finalPanelActive)
             {
                 PauseGame();
             }
 
+            
             if (Input.GetKeyDown(KeyCode.CapsLock))
             {
 #if UNITY_EDITOR
@@ -130,13 +142,159 @@ public class GameManager : MonoBehaviour {
         gameFinished = true;
     }
 
+    public void CheckForInputs()
+    {
+
+    }
+
     #region Pause Methods
+    public void PauseActions()
+    {
+        if (InputManager.Instance.EscapeHasBeenPressed() && !confirmationPanelOpen)
+        {
+            Resume();
+        }
+
+        if (confirmationPanelOpen)
+        {
+            if (InputManager.Instance.EscapeHasBeenPressed())
+            {
+                if (restartConfirmationPanel.gameObject.activeSelf)
+                    HideRestartConfirmationPanel();
+
+                if (settingsPanel.gameObject.activeSelf)
+                    HideSettingsPanel();
+
+                if (menuConfirmationPanel.gameObject.activeSelf)
+                    HideMenuConfirmationPanel();
+
+                if (quitConfirmationPanel.gameObject.activeSelf)
+                    HideQuitConfirmationPanel();
+            }
+        }
+    }
+
     public void PauseGame()
     {
+        if (!confirmationPanelOpen)
+        {
+            menuPanel.SetActive(true);
+            Time.timeScale = 0;
+            isGamePaused = true;
+        }
+    }
+
+    public void Resume()
+    {
+        menuPanel.SetActive(false);
+        Time.timeScale = 1;
+        isGamePaused = false;
+    }
+
+    #region Restart Button
+    public void RestartScene()
+    {
+        isGamePaused = false;
+        Time.timeScale = 1;
+        SceneManager.LoadScene(1);
+    }
+
+    public void ShowRestartConfirmationPanel()
+    {
+        confirmationPanelOpen = true;
+        restartConfirmationPanel.SetActive(true);
+        menuPanel.SetActive(false);
+    }
+
+    public void HideRestartConfirmationPanel()
+    {
+        confirmationPanelOpen = false;
+        restartConfirmationPanel.SetActive(false);
         menuPanel.SetActive(true);
-        Time.timeScale = 0;
     }
     #endregion
+
+    #region Menu Button
+    public void LoadMenu()
+    {
+        isGamePaused = false;
+        SceneManager.LoadScene(0);
+    }
+
+    public void ShowMenuConfirmationPanel()
+    {
+        confirmationPanelOpen = true;
+        menuConfirmationPanel.SetActive(true);
+        menuPanel.SetActive(false);
+    }
+
+    public void HideMenuConfirmationPanel()
+    {
+        confirmationPanelOpen = false;
+        menuConfirmationPanel.SetActive(false);
+        menuPanel.SetActive(true);
+    }
+    #endregion
+
+    #region Settings Button
+    /*public void ShowSettingsPanel()
+    {
+        StartCoroutine(HighlightButton(controllerToggle));
+        confirmationPanelOpen = true;
+        settingsPanel.SetActive(true);
+        pauseMenuGO.SetActive(false);
+    }
+
+    public void HideSettingsPanel()
+    {
+        StartCoroutine(HighlightButton(settingsButton));
+        confirmationPanelOpen = false;
+        settingsPanel.SetActive(false);
+        pauseMenuGO.SetActive(true);
+    }
+
+    public void SetControllerToggle()
+    {
+        controllerToggleIsChecked = !controllerToggleIsChecked;
+
+        if (controllerToggleIsChecked)
+        {
+            InputsManager.Instance.isControllerPlaying = true; //InputsManager.isControllerPlaying = true;
+        }
+        else
+        {
+            InputsManager.Instance.isControllerPlaying = false; //InputsManager.isControllerPlaying = false;
+        }
+    }*/
+    #endregion
+
+    #region Quit Button
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        //UnityEditor.EditorApplication.isPlaying = false; //si le damos al botón de Quit en Unity, parará de jugar
+#else
+        Application.Quit(); //si le damos Quit fuera de Unity, cerrará el programa
+#endif
+    }
+
+    public void ShowQuitConfirmationPanel()
+    {
+        confirmationPanelOpen = true;
+        quitConfirmationPanel.SetActive(true);
+        menuPanel.SetActive(false);
+    }
+
+    public void HideQuitConfirmationPanel()
+    {
+        confirmationPanelOpen = false;
+        quitConfirmationPanel.SetActive(false);
+        menuPanel.SetActive(true);
+    }
+    #endregion
+
+    #endregion
+
 
     #region Game States
     public void ShowVictoryScreen()

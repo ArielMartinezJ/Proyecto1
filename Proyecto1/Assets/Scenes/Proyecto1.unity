@@ -919,7 +919,7 @@ GameObject:
   - component: {fileID: 130450936}
   - component: {fileID: 130450935}
   m_Layer: 5
-  m_Name: Menu Confirmation Panel (1)
+  m_Name: Menu Confirmation Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2441,34 +2441,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.22, z: 0}
---- !u!1 &381051906
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 381051907}
-  m_Layer: 0
-  m_Name: MenuManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &381051907
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 381051906}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &392848560
 Prefab:
   m_ObjectHideFlags: 0
@@ -4392,7 +4364,7 @@ GameObject:
   - component: {fileID: 685952777}
   - component: {fileID: 685952776}
   m_Layer: 5
-  m_Name: Quit Confirmation Panel (2)
+  m_Name: Quit Confirmation Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6539,6 +6511,46 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 2b127815fd0f2074eae3a0c6a4786d0b, type: 2}
   m_PrefabInternal: {fileID: 974551358}
+--- !u!1 &987415538
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 987415540}
+  - component: {fileID: 987415539}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &987415539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987415538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eabe61f9329d9f142aae3592030d6be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &987415540
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987415538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -61.170986, y: 6.9806275, z: 60.18575}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &989609718
 Prefab:
   m_ObjectHideFlags: 0
@@ -7221,6 +7233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1086812382}
   - component: {fileID: 1086812381}
+  - component: {fileID: 1086812383}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -7241,6 +7254,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeText: {fileID: 688401480}
   menuPanel: {fileID: 1927904500}
+  restartConfirmationPanel: {fileID: 869146016}
+  settingsPanel: {fileID: 0}
+  menuConfirmationPanel: {fileID: 130450933}
+  quitConfirmationPanel: {fileID: 685952774}
   victoryPanel: {fileID: 504315449}
   defeatPanel: {fileID: 908292699}
 --- !u!4 &1086812382
@@ -7254,8 +7271,19 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1086812383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1086812380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e1ebd5e728853141ad121e82f41dbe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1091810408
 GameObject:
   m_ObjectHideFlags: 0
