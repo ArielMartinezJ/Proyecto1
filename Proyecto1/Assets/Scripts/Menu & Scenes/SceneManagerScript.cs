@@ -5,24 +5,22 @@ using UnityEngine;
 
 public class SceneManagerScript : MonoBehaviour {
 
-    private static SceneManagerScript mySceneInstance;
+    private static SceneManagerScript myInstance1;
 
     public static SceneManagerScript Instance
     {
-        get
-        {
-            return mySceneInstance;
-        }
+        get { return myInstance1; }
     }
 
     private void Awake()
     {
-        if (mySceneInstance != null || mySceneInstance != this)
+        if (myInstance1 != null && myInstance1 != this)
         {
             Destroy(this.gameObject);
             return;
         }
-        mySceneInstance = this;
+
+        myInstance1 = this;
         DontDestroyOnLoad(this.gameObject);
     }
 

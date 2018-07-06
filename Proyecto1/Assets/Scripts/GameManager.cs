@@ -43,10 +43,7 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager Instance
     {
-        get
-        {
-            return _instance;
-        }
+        get { return _instance; }
     }
 
     private void Awake()
@@ -90,12 +87,10 @@ public class GameManager : MonoBehaviour {
             LockCursor();
             if (isGamePaused)
             {
-                Debug.Log("Pausing actions");
                 PauseActions();
             }
             else if (Input.GetKeyDown(KeyCode.Escape) && !finalPanelActive && !isGamePaused)
             {
-                Debug.Log("Pausing");
                 PauseGame();
             } else
             {
@@ -132,10 +127,13 @@ public class GameManager : MonoBehaviour {
 
             if (Input.GetMouseButtonDown(0))
                 Cursor.lockState = CursorLockMode.Locked;
+
+            Cursor.visible = false;
         }
         else
         {
             Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
     
@@ -145,20 +143,12 @@ public class GameManager : MonoBehaviour {
         gameFinished = true;
     }
 
-    public void CheckForInputs()
-    {
-
-    }
-
     #region Pause Methods
     public void PauseActions()
     {
-        if (!confirmationPanelOpen && isGamePaused)
+        if (Input.GetKeyDown(KeyCode.Escape) && !confirmationPanelOpen && isGamePaused)
         {
-            if (Input.GetKeyDown(KeyCode.Escape))//InputManager.Instance.EscapeHasBeenPressed())
-            {
-                Resume();
-            }
+            Resume();
         }
 
         if (confirmationPanelOpen)
@@ -210,14 +200,14 @@ public class GameManager : MonoBehaviour {
     {
         confirmationPanelOpen = true;
         restartConfirmationPanel.SetActive(true);
-        pausePanel.SetActive(false);
+        buttonsPanel.SetActive(false);
     }
 
     public void HideRestartConfirmationPanel()
     {
         confirmationPanelOpen = false;
         restartConfirmationPanel.SetActive(false);
-        pausePanel.SetActive(true);
+        buttonsPanel.SetActive(true);
     }
     #endregion
 
@@ -232,14 +222,14 @@ public class GameManager : MonoBehaviour {
     {
         confirmationPanelOpen = true;
         menuConfirmationPanel.SetActive(true);
-        pausePanel.SetActive(false);
+        buttonsPanel.SetActive(false);
     }
 
     public void HideMenuConfirmationPanel()
     {
         confirmationPanelOpen = false;
         menuConfirmationPanel.SetActive(false);
-        pausePanel.SetActive(true);
+        buttonsPanel.SetActive(true);
     }
     #endregion
 
@@ -285,19 +275,18 @@ public class GameManager : MonoBehaviour {
     {
         confirmationPanelOpen = true;
         quitConfirmationPanel.SetActive(true);
-        pausePanel.SetActive(false);
+        buttonsPanel.SetActive(false);
     }
 
     public void HideQuitConfirmationPanel()
     {
         confirmationPanelOpen = false;
         quitConfirmationPanel.SetActive(false);
-        pausePanel.SetActive(true);
+        buttonsPanel.SetActive(true);
     }
     #endregion
 
     #endregion
-
 
     #region Game States
     public void ShowVictoryScreen()

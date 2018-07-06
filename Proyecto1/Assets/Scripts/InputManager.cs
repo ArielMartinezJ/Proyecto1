@@ -31,11 +31,12 @@ public class InputManager : MonoBehaviour {
 	
 	void Update ()
     {
-        EscapeHasBeenPressed();
-    }
+		
+	}
 
     public bool EscapeHasBeenPressed()
     {
+        Debug.Log("Escape has been pressed");
         if (Input.GetAxis("Cancel") == 1)
         {
             return true;
