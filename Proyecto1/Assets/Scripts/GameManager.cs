@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour {
     public Text timeText;
 
     [Header("Menu Variables")]
-    public GameObject menuPanel;
+    public GameObject pausePanel;
+    public GameObject buttonsPanel;
     public GameObject restartConfirmationPanel;
     public GameObject settingsPanel;
     public GameObject menuConfirmationPanel;
@@ -86,18 +87,20 @@ public class GameManager : MonoBehaviour {
 
         if (isPlaying)
         {
-            DisplayTime();
             LockCursor();
-
             if (isGamePaused)
             {
+                Debug.Log("Pausing actions");
                 PauseActions();
             }
-            else if (InputManager.Instance.EscapeHasBeenPressed() && !finalPanelActive)
+            else if (Input.GetKeyDown(KeyCode.Escape) && !finalPanelActive && !isGamePaused)
             {
+                Debug.Log("Pausing");
                 PauseGame();
+            } else
+            {
+                DisplayTime();
             }
-
             
             if (Input.GetKeyDown(KeyCode.CapsLock))
             {
@@ -120,7 +123,7 @@ public class GameManager : MonoBehaviour {
 
     void LockCursor()
     {
-        if (isPlaying)
+        if (!isGamePaused)
         {
             Cursor.lockState = CursorLockMode.Locked;
 
@@ -150,14 +153,17 @@ public class GameManager : MonoBehaviour {
     #region Pause Methods
     public void PauseActions()
     {
-        if (InputManager.Instance.EscapeHasBeenPressed() && !confirmationPanelOpen)
+        if (!confirmationPanelOpen && isGamePaused)
         {
-            Resume();
+            if (Input.GetKeyDown(KeyCode.Escape))//InputManager.Instance.EscapeHasBeenPressed())
+            {
+                Resume();
+            }
         }
 
         if (confirmationPanelOpen)
         {
-            if (InputManager.Instance.EscapeHasBeenPressed())
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (restartConfirmationPanel.gameObject.activeSelf)
                     HideRestartConfirmationPanel();
@@ -178,15 +184,16 @@ public class GameManager : MonoBehaviour {
     {
         if (!confirmationPanelOpen)
         {
-            menuPanel.SetActive(true);
+            pausePanel.SetActive(true);
+            buttonsPanel.SetActive(true);
             Time.timeScale = 0;
-            isGamePaused = true;
+            isGamePaused = !isGamePaused;
         }
     }
 
     public void Resume()
     {
-        menuPanel.SetActive(false);
+        pausePanel.SetActive(false);
         Time.timeScale = 1;
         isGamePaused = false;
     }
@@ -196,21 +203,21 @@ public class GameManager : MonoBehaviour {
     {
         isGamePaused = false;
         Time.timeScale = 1;
-        SceneManagerScript.Instance.ReloadScene();
+        SceneManagerScript.Instance.RestartScene();
     }
 
     public void ShowRestartConfirmationPanel()
     {
         confirmationPanelOpen = true;
         restartConfirmationPanel.SetActive(true);
-        menuPanel.SetActive(false);
+        pausePanel.SetActive(false);
     }
 
     public void HideRestartConfirmationPanel()
     {
         confirmationPanelOpen = false;
         restartConfirmationPanel.SetActive(false);
-        menuPanel.SetActive(true);
+        pausePanel.SetActive(true);
     }
     #endregion
 
@@ -225,14 +232,14 @@ public class GameManager : MonoBehaviour {
     {
         confirmationPanelOpen = true;
         menuConfirmationPanel.SetActive(true);
-        menuPanel.SetActive(false);
+        pausePanel.SetActive(false);
     }
 
     public void HideMenuConfirmationPanel()
     {
         confirmationPanelOpen = false;
         menuConfirmationPanel.SetActive(false);
-        menuPanel.SetActive(true);
+        pausePanel.SetActive(true);
     }
     #endregion
 
@@ -278,14 +285,14 @@ public class GameManager : MonoBehaviour {
     {
         confirmationPanelOpen = true;
         quitConfirmationPanel.SetActive(true);
-        menuPanel.SetActive(false);
+        pausePanel.SetActive(false);
     }
 
     public void HideQuitConfirmationPanel()
     {
         confirmationPanelOpen = false;
         quitConfirmationPanel.SetActive(false);
-        menuPanel.SetActive(true);
+        pausePanel.SetActive(true);
     }
     #endregion
 

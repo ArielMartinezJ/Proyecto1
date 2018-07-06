@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour {
 
-    private static InputManager _instance;
+    private static InputManager myInstance;
 
     public static InputManager Instance
     {
-        get { return _instance; }
+        get { return myInstance; }
     }
 
     private void Awake()
     {
-        if (_instance != null && _instance != this)
+        if (myInstance != null && myInstance != this)
         {
             Destroy(this.gameObject);
             return;
         }
 
-        _instance = this;
+        myInstance = this;
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -31,12 +31,18 @@ public class InputManager : MonoBehaviour {
 	
 	void Update ()
     {
-		
-	}
+        EscapeHasBeenPressed();
+    }
 
     public bool EscapeHasBeenPressed()
     {
-        Debug.Log(escapeValue == Input.GetAxis("Cancel"));
-        return escapeValue == Input.GetAxis("Cancel");
+        if (Input.GetAxis("Cancel") == 1)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+        //return escapeValue == Input.GetAxis("Cancel");
     }
 }

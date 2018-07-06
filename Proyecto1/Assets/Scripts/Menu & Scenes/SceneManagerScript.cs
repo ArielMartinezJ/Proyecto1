@@ -5,24 +5,24 @@ using UnityEngine;
 
 public class SceneManagerScript : MonoBehaviour {
 
-    private static SceneManagerScript _instance;
+    private static SceneManagerScript mySceneInstance;
 
     public static SceneManagerScript Instance
     {
         get
         {
-            return _instance;
+            return mySceneInstance;
         }
     }
 
     private void Awake()
     {
-        if (_instance != null || _instance != this)
+        if (mySceneInstance != null || mySceneInstance != this)
         {
             Destroy(this.gameObject);
             return;
         }
-        _instance = this;
+        mySceneInstance = this;
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -50,7 +50,7 @@ public class SceneManagerScript : MonoBehaviour {
 #endif
     }
 
-    public void ReloadScene()
+    public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
