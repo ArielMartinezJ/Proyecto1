@@ -162,8 +162,8 @@ public class GameManager : MonoBehaviour {
                 if (restartConfirmationPanel.gameObject.activeSelf)
                     HideRestartConfirmationPanel();
 
-                if (settingsPanel.gameObject.activeSelf)
-                    HideSettingsPanel();
+                /*if (settingsPanel.gameObject.activeSelf)
+                    HideSettingsPanel();*/
 
                 if (menuConfirmationPanel.gameObject.activeSelf)
                     HideMenuConfirmationPanel();
@@ -196,7 +196,7 @@ public class GameManager : MonoBehaviour {
     {
         isGamePaused = false;
         Time.timeScale = 1;
-        SceneManager.LoadScene(1);
+        SceneManagerScript.Instance.ReloadScene();
     }
 
     public void ShowRestartConfirmationPanel()
@@ -218,7 +218,7 @@ public class GameManager : MonoBehaviour {
     public void LoadMenu()
     {
         isGamePaused = false;
-        SceneManager.LoadScene(0);
+        SceneManagerScript.Instance.GoBackToMenu();
     }
 
     public void ShowMenuConfirmationPanel()
@@ -271,11 +271,7 @@ public class GameManager : MonoBehaviour {
     #region Quit Button
     public void QuitGame()
     {
-#if UNITY_EDITOR
-        //UnityEditor.EditorApplication.isPlaying = false; //si le damos al botón de Quit en Unity, parará de jugar
-#else
-        Application.Quit(); //si le damos Quit fuera de Unity, cerrará el programa
-#endif
+        SceneManagerScript.Instance.QuitGame();
     }
 
     public void ShowQuitConfirmationPanel()
