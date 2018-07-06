@@ -118,8 +118,9 @@ public class GameManager : MonoBehaviour {
 
     void LockCursor()
     {
-        if (!isGamePaused)
+        if (!isGamePaused || !finalPanelActive && !gameFinished)
         {
+            Debug.Log("Hello");
             Cursor.lockState = CursorLockMode.Locked;
 
             if (Input.GetAxis("Cancel") > 0)
@@ -132,6 +133,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
+            Debug.Log("Not again");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
@@ -291,12 +293,14 @@ public class GameManager : MonoBehaviour {
     #region Game States
     public void ShowVictoryScreen()
     {
+        gameFinished = true;
         victoryPanel.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void ShowDefeatScreen()
     {
+        gameFinished = true;
         defeatPanel.SetActive(true);
         Time.timeScale = 0;
     }
