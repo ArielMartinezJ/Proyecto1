@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour {
 #region Public Variables
     public enum State { GOING, REACHING, WAITING }
     public State currentState = State.WAITING;
-    public float waitingTime = 2f;
+    public float waitingTime = 1f;
     public float elapsedTime;
     public float wanderRadius = 5f;
     public LayerMask dangerZones;
