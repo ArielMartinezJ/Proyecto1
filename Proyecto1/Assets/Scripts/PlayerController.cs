@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour {
     private float x_input;
     private float z_input;
     private float newAngle;
-    private Rigidbody myRigidbody;
     private Vector3 movement;
     private Vector3 direction;
     private CollisionFlags colisionesDelPlayer = CollisionFlags.None;
@@ -30,8 +29,6 @@ public class PlayerController : MonoBehaviour {
     void Start ()
     {
         characterController = GetComponent<CharacterController>();
-        myRigidbody = GetComponent<Rigidbody>();
-
     }
 	
 
@@ -40,13 +37,6 @@ public class PlayerController : MonoBehaviour {
         x_input = Input.GetAxis("Horizontal");
         z_input = Input.GetAxis("Vertical");
 
-        //this.transform.Rotate(0, z_input, 0);
-        //this.transform.Translate(z_input, 0, x_input);
-
-        if (characterController.isGrounded)
-        {
-            
-        }
         movement = new Vector3(x_input, 0f, z_input);
         movement = transform.TransformDirection(movement);
 
@@ -61,7 +51,7 @@ public class PlayerController : MonoBehaviour {
         }*/
 
 
-
+        //FORMA 1--------------- rota muy bien, pero se mueve al rotar
         /*if (movement != Vector3.zero)
         {
             if (Vector3.Angle(transform.forward, direction) > 179)
@@ -69,35 +59,22 @@ public class PlayerController : MonoBehaviour {
                 // This will cause us to always turn to the right to go the opposite direction
                 direction = transform.TransformDirection(new Vector3(.01f, 0, -1));
             }
-
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(movement), 90f * Time.deltaTime);
-            //transform.rotation = Quaternion.LookRotation(movement);
-            //Quaternion.Slerp(transform.rotation, (transform.rotation * to), rotationSpeed * Time.deltaTime);
-            //Quaternion rotation = Quaternion.LookRotation((transform.position + this.myRigidbody.velocity) - transform.position);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationSpeed * Time.deltaTime);
+
             Vector3 moveDirection = transform.forward;
             moveDirection.y -= gravity * Time.deltaTime;
-
-
-            
         }*/
+        //-----------------------------
 
+        //FORMA 2-------------- rota en el sitio, pero rota TANTO que gira
         if (movement != Vector3.zero)
             transform.rotation = Quaternion.LookRotation(movement, transform.up);
         movement *= movementSpeed;
+
         //characterController.Move((movement + moveDirection) * Time.deltaTime);
         characterController.Move((movement) * Time.deltaTime);
-        /*else
-        {
-            transform.rotation = Quaternion.Euler(Vector3.zero);
-        }*/
+        //--------------------------------
         //transform.LookAt(movement, Vector3.up);
-
-        //direction = movement;
-        //direction = new Vector3(x_input, 0f, z_input);
-
-        /*newAngle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(newAngle, Vector3.forward);*/
 
         if (characterController.isGrounded)
         {
