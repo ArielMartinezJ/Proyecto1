@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour {
 
     void Update()
     {
-        if (!gameFinished)
+        /*if (!gameFinished)
         {
             isPlaying = true;
         }
@@ -80,7 +80,7 @@ public class GameManager : MonoBehaviour {
             {
                 ShowDefeatScreen();
             }
-        }
+        }*/
 
         if (isPlaying)
         {
@@ -137,12 +137,6 @@ public class GameManager : MonoBehaviour {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
-    }
-    
-    public void GameOver()
-    {
-        playerIsDead = true;
-        gameFinished = true;
     }
 
     #region Pause Methods
@@ -293,14 +287,18 @@ public class GameManager : MonoBehaviour {
     #region Game States
     public void ShowVictoryScreen()
     {
+        playerIsDead = false;
         gameFinished = true;
+        isPlaying = false;
         victoryPanel.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void ShowDefeatScreen()
     {
+        playerIsDead = true;
         gameFinished = true;
+        isPlaying = false;
         defeatPanel.SetActive(true);
         Time.timeScale = 0;
     }
