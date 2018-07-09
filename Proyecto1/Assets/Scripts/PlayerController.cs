@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 
 
 
-        if (movement != Vector3.zero)
+        /*if (movement != Vector3.zero)
         {
             if (Vector3.Angle(transform.forward, direction) > 179)
             {
@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour {
                 direction = transform.TransformDirection(new Vector3(.01f, 0, -1));
             }
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movement), 90f * Time.deltaTime);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(movement), 90f * Time.deltaTime);
             //transform.rotation = Quaternion.LookRotation(movement);
             //Quaternion.Slerp(transform.rotation, (transform.rotation * to), rotationSpeed * Time.deltaTime);
             //Quaternion rotation = Quaternion.LookRotation((transform.position + this.myRigidbody.velocity) - transform.position);
@@ -79,9 +79,14 @@ public class PlayerController : MonoBehaviour {
             moveDirection.y -= gravity * Time.deltaTime;
 
 
-            movement *= movementSpeed;
-            characterController.Move((movement) * Time.deltaTime);
-        }
+            
+        }*/
+
+        if (movement != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(movement, transform.up);
+        movement *= movementSpeed;
+        //characterController.Move((movement + moveDirection) * Time.deltaTime);
+        characterController.Move((movement) * Time.deltaTime);
         /*else
         {
             transform.rotation = Quaternion.Euler(Vector3.zero);
