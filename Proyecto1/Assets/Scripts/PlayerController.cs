@@ -72,6 +72,11 @@ public class PlayerController : MonoBehaviour {
         {
             GameManager.Instance.GameOver();
         }
+
+        if (hit.gameObject.tag == "Goal")
+        {
+            //GameManager.Instance.Victory();
+        }
         //body.AddForceAtPosition(-hit.normal * weight, hit.point);
     }
 
