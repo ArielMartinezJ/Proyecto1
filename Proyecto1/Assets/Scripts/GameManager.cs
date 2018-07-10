@@ -106,6 +106,11 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+
+    public bool CheckIfPlayerIsDead()
+    {
+        return playerIsDead;
+    }
     void DisplayTime()
     {
         gameTime = (int)Time.deltaTime;
@@ -120,7 +125,6 @@ public class GameManager : MonoBehaviour {
     {
         if (!isGamePaused || !finalPanelActive && !gameFinished)
         {
-            Debug.Log("Hello");
             Cursor.lockState = CursorLockMode.Locked;
 
             if (Input.GetAxis("Cancel") > 0)
@@ -133,7 +137,6 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-            Debug.Log("Not again");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }

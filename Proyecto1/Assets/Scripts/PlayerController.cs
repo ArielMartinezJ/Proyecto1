@@ -34,67 +34,80 @@ public class PlayerController : MonoBehaviour {
 
 	void Update ()
     {
-        x_input = Input.GetAxis("Horizontal");
-        z_input = Input.GetAxis("Vertical");
-
-        movement = new Vector3(x_input, 0f, z_input);
-        movement = transform.TransformDirection(movement);
-
-        //transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, z_input));
-
-        /*if (Input.GetKeyDown(KeyCode.A))
+        if (!GameManager.Instance.CheckIfPlayerIsDead())
         {
-            transform.rotation = Quaternion.Lerp(from, to, Time.time * rotationSpeed);
-        } else if (Input.GetKeyDown(KeyCode.D))
-        {
-            transform.rotation = Quaternion.Lerp(to, from, Time.time * rotationSpeed);
-        }*/
+            x_input = Input.GetAxis("Horizontal");
+            z_input = Input.GetAxis("Vertical");
 
+            movement = new Vector3(x_input, 0f, z_input);
+            movement = transform.TransformDirection(movement);
 
-        //FORMA 1--------------- rota muy bien, pero se mueve al rotar
-        /*if (movement != Vector3.zero)
-        {
-            if (Vector3.Angle(transform.forward, direction) > 179)
+            //transform.rotation = Quaternion.LookRotation(new Vector3(0, 0, z_input));
+
+            /*if (Input.GetKeyDown(KeyCode.A))
             {
-                // This will cause us to always turn to the right to go the opposite direction
-                direction = transform.TransformDirection(new Vector3(.01f, 0, -1));
-            }
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(movement), 90f * Time.deltaTime);
-
-            Vector3 moveDirection = transform.forward;
-            moveDirection.y -= gravity * Time.deltaTime;
-        }*/
-        //-----------------------------
-
-        //FORMA 2-------------- rota en el sitio, pero rota TANTO que gira
-        if (movement != Vector3.zero)
-            transform.rotation = Quaternion.LookRotation(movement, transform.up);
-        movement *= movementSpeed;
-
-        //characterController.Move((movement + moveDirection) * Time.deltaTime);
-        characterController.Move((movement) * Time.deltaTime);
-        //--------------------------------
-        //transform.LookAt(movement, Vector3.up);
-
-        if (characterController.isGrounded)
-        {
-            verticalVelocity = -gravity * Time.deltaTime;
-            /*if (Input.GetAxis("Jump") > 0)
+                transform.rotation = Quaternion.Lerp(from, to, Time.time * rotationSpeed);
+            } else if (Input.GetKeyDown(KeyCode.D))
             {
-                verticalVelocity = jumpForce;
+                transform.rotation = Quaternion.Lerp(to, from, Time.time * rotationSpeed);
             }*/
-        }
-        else
-        {
-            verticalVelocity -= gravity * Time.deltaTime;
-        }
-        //Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
-        /*Vector3 moveDirection = transform.forward;
-        moveDirection.y -= gravity * Time.deltaTime;
-        colisionesDelPlayer = characterController.collisionFlags;
 
-        movement *= movementSpeed;
-        characterController.Move((movement + moveDirection) * Time.deltaTime);*/
+
+            //FORMA 1--------------- rota muy bien, pero se mueve al rotar
+            /*if (movement != Vector3.zero)
+            {
+                if (Vector3.Angle(transform.forward, direction) > 179)
+                {
+                    // This will cause us to always turn to the right to go the opposite direction
+                    direction = transform.TransformDirection(new Vector3(.01f, 0, -1));
+                }
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(movement), 90f * Time.deltaTime);
+
+                Vector3 moveDirection = transform.forward;
+                moveDirection.y -= gravity * Time.deltaTime;
+            }*/
+            //-----------------------------
+
+            //FORMA 2-------------- rota en el sitio, pero rota TANTO que gira
+            /*if (movement != Vector3.zero)
+                transform.rotation = Quaternion.LookRotation(movement, transform.up);
+            movement *= movementSpeed;*/
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                this.transform.rotation *= Quaternion.Euler(0f, -2f, 0f);
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                this.transform.rotation *= Quaternion.Euler(0f, 2f, 0f);
+            }
+
+            movement *= movementSpeed;
+            //characterController.Move((movement + moveDirection) * Time.deltaTime);
+            //characterController.Move((movement + moveVector)  * Time.deltaTime);
+            //--------------------------------
+            //transform.LookAt(movement, Vector3.up);
+
+            if (characterController.isGrounded)
+            {
+                verticalVelocity = -gravity * Time.deltaTime;
+                /*if (Input.GetAxis("Jump") > 0)
+                {
+                    verticalVelocity = jumpForce;
+                }*/
+            }
+            else
+            {
+                verticalVelocity -= gravity * Time.deltaTime;
+            }
+            Vector3 moveVector = new Vector3(0, verticalVelocity, 0);
+            /*Vector3 moveDirection = transform.forward;
+            moveDirection.y -= gravity * Time.deltaTime;
+            colisionesDelPlayer = characterController.collisionFlags;
+
+            movement *= movementSpeed;*/
+            characterController.Move((movement + moveVector) * Time.deltaTime);
+        }
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
