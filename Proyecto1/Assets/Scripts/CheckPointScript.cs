@@ -30,7 +30,7 @@ public class CheckPointScript : MonoBehaviour {
 	void Update ()
     {
         //initialSpawnPosition = newPosition;
-        Debug.Log("Current Spawn Position: " + spawnPosition);
+        //Debug.Log("Current Spawn Position: " + spawnPosition);
 
         /*if (HealthScript.iAmrestarting)
         {
@@ -43,9 +43,11 @@ public class CheckPointScript : MonoBehaviour {
         if (coll.gameObject.tag == "Player")
         {
             Debug.Log("Checkpoint passed");
-            checkpointPassed = true;
+            GameManager.Instance.SetLastCheckpointPosition(this.transform.position);
+            Debug.Log("this position" + this.transform.position);
+            /*checkpointPassed = true;
             newPosition = this.gameObject.transform.position;
-            forward = this.gameObject.transform.forward;
+            forward = this.gameObject.transform.forward;*/
             /*if (!alreadyPassed)
             {
                 checkpointSound.Play();

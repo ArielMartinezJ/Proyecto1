@@ -122,7 +122,15 @@ public class PlayerController : MonoBehaviour {
 
         if (hit.gameObject.tag == "Enemy")
         {
-            GameManager.Instance.ShowDefeatScreen();
+            if (!GameManager.Instance.checkpointPassed)
+            {
+                GameManager.Instance.ShowDefeatScreen();
+            }
+            else
+            {
+                characterController.Move(GameManager.Instance.GetSpawnPosition());
+                Debug.Log("current position" + GameManager.Instance.GetSpawnPosition());
+            }
         }
 
         if (hit.gameObject.tag == "Goal")

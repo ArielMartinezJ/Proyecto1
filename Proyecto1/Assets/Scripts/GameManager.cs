@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour {
 
     #region Public Variables
     [Header("\t--Public Variables--")]
-
+    public bool checkpointPassed = false;
     [Header("Time Variables")]
     public Text timeText;
 
@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviour {
     private bool isPlaying = false;
     private bool playerIsDead = false;
     private bool isGamePaused = false;
+    private Vector3 spawnPosition;
 
     public static GameManager Instance
     {
@@ -56,35 +57,29 @@ public class GameManager : MonoBehaviour {
 
         _instance = this;
         DontDestroyOnLoad(this.gameObject);
+
+        gameFinished = false;
+        isPlaying = true;
+        isGamePaused = false;
+        playerIsDead = false;
+        finalPanelActive = false;
     }
 
     void Start()
     {
-
     }
 
     void Update()
     {
-        /*if (!gameFinished)
+        LockCursor();
+        if (!gameFinished)
         {
             isPlaying = true;
+            
         }
-        else
-        {
-            isPlaying = false;
-            if (!playerIsDead)
-            {
-                ShowVictoryScreen();
-            }
-            else
-            {
-                ShowDefeatScreen();
-            }
-        }*/
 
         if (isPlaying)
         {
-            LockCursor();
             if (isGamePaused)
             {
                 PauseActions();
@@ -124,8 +119,9 @@ public class GameManager : MonoBehaviour {
 
     void LockCursor()
     {
-        if (!isGamePaused || !finalPanelActive && !gameFinished)
+        if (!isGamePaused && !finalPanelActive && !gameFinished)
         {
+            Debug.Log("HELLO");
             Cursor.lockState = CursorLockMode.Locked;
 
             if (Input.GetAxis("Cancel") > 0)
@@ -138,6 +134,7 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
+            Debug.Log("SHOW YOURSELF");
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
@@ -289,6 +286,17 @@ public class GameManager : MonoBehaviour {
     #endregion
 
     #region Game States
+    public void SetLastCheckpointPosition(Vector3 currentSpawnPosition)
+    {
+        checkpointPassed = true;
+        spawnPosition = currentSpawnPosition;
+    }
+
+    public Vector3 GetSpawnPosition()
+    {
+        return spawnPosition;
+    }
+
     public void ShowVictoryScreen()
     {
         playerIsDead = false;
