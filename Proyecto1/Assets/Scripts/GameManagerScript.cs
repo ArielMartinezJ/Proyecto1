@@ -45,7 +45,7 @@ public class GameManagerScript : MonoBehaviour {
 
         if (checkpointScript.checkpointPassed)
         {
-            spawnPosition = checkpointScript.spawnPosition;
+            spawnPosition = checkpointScript.initialSpawnPosition;
         }
 
         /*if (!CharacterThirdPerson.gameHasRestarted)

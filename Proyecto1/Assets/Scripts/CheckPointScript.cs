@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class CheckPointScript : MonoBehaviour {
 
+    #region Public Variables
+    [Header("\t--Public Variables--")]
+    public Vector3 initialSpawnPosition;
+    public bool checkpointPassed = false;
     public Vector3 spawnPosition;
+    #endregion
     private Vector3 newPosition;
     public Vector3 forward;
-    public bool checkpointPassed = false;
+    
     private bool alreadyPassed = false;
 
     [SerializeField]
@@ -15,7 +20,7 @@ public class CheckPointScript : MonoBehaviour {
 
     void Awake ()
     {
-        spawnPosition = new Vector3(16.9f, 1.08f, 1.19f);
+        initialSpawnPosition = new Vector3(-66.16f, 17.3f, 57.02f);
     }
 
 	void Start ()
@@ -24,7 +29,8 @@ public class CheckPointScript : MonoBehaviour {
 	
 	void Update ()
     {
-        spawnPosition = newPosition;
+        //initialSpawnPosition = newPosition;
+        Debug.Log("Current Spawn Position: " + spawnPosition);
 
         /*if (HealthScript.iAmrestarting)
         {
@@ -40,11 +46,11 @@ public class CheckPointScript : MonoBehaviour {
             checkpointPassed = true;
             newPosition = this.gameObject.transform.position;
             forward = this.gameObject.transform.forward;
-            if (!alreadyPassed)
+            /*if (!alreadyPassed)
             {
                 checkpointSound.Play();
             }
-            alreadyPassed = true;
+            alreadyPassed = true;*/
         }
     }
 }

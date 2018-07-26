@@ -111,6 +111,7 @@ public class GameManager : MonoBehaviour {
     {
         return playerIsDead;
     }
+
     void DisplayTime()
     {
         gameTime = (int)Time.deltaTime;
