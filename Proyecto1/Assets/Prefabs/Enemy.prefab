@@ -256,7 +256,7 @@ MonoBehaviour:
   currentState: 2
   waitingTime: 0.5
   elapsedTime: 0
-  wanderRadius: 5
+  wanderRadius: 3
   dangerZones:
     serializedVersion: 2
     m_Bits: 256

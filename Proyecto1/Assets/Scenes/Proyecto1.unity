@@ -852,6 +852,7 @@ Transform:
   m_Children:
   - {fileID: 423788811}
   - {fileID: 358231676}
+  - {fileID: 230328228}
   m_Father: {fileID: 0}
   m_RootOrder: 27
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1863,6 +1864,63 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.210907, y: 8.675148, z: 14.0433035}
   m_Center: {x: 6.3775177, y: -3.5602455, z: -0.135155}
+--- !u!1 &230328227
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 230328228}
+  - component: {fileID: 230328230}
+  - component: {fileID: 230328229}
+  m_Layer: 0
+  m_Name: Victory trigger (1)
+  m_TagString: Goal
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &230328228
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 230328227}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -55.81, y: 2.91, z: 69.44}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 120233695}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &230328229
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 230328227}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &230328230
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 230328227}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.057911, y: 3.506775, z: 8.097593}
+  m_Center: {x: 0.24580193, y: -0.97605896, z: -1.2405043}
 --- !u!4 &233662183 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 9ae7f9f9eacff4142b21eb85ae606fdc, type: 2}
@@ -3704,6 +3762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 358231676}
   - component: {fileID: 358231677}
+  - component: {fileID: 358231678}
   m_Layer: 0
   m_Name: Victory trigger
   m_TagString: Goal
@@ -3736,6 +3795,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 8.057911, y: 3.506775, z: 8.097593}
   m_Center: {x: 0.24580193, y: -0.97605896, z: -1.2405043}
+--- !u!54 &358231678
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 358231675}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &374056415
 Prefab:
   m_ObjectHideFlags: 0
@@ -15340,7 +15414,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4817414129636438, guid: 487354e7103519140aab86b0c0dda0ac, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.5619999
+      value: -1.475
       objectReference: {fileID: 0}
     - target: {fileID: 4817414129636438, guid: 487354e7103519140aab86b0c0dda0ac, type: 2}
       propertyPath: m_LocalPosition.z
@@ -15866,8 +15940,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1820594995}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.1, y: 1.92, z: 70.01}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3.1, y: 1.04, z: 70.01}
+  m_LocalScale: {x: 1, y: 0.37932774, z: 1}
   m_Children: []
   m_Father: {fileID: 423788811}
   m_RootOrder: 1

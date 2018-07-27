@@ -107,6 +107,11 @@ public class PlayerController : MonoBehaviour {
 
             movement *= movementSpeed;*/
             characterController.Move((movement + moveVector) * Time.deltaTime);
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                GameManager.Instance.ShowVictoryScreen();
+            }
         }
     }
 
@@ -132,12 +137,16 @@ public class PlayerController : MonoBehaviour {
                 Debug.Log("current position" + GameManager.Instance.GetSpawnPosition());
             }
         }
+        //body.AddForceAtPosition(-hit.normal * weight, hit.point);
+    }
 
-        if (hit.gameObject.tag == "Goal")
+    void OnTriggerEnter(Collider coll)
+    {
+        if (coll.gameObject.tag == "Goal")
         {
+            Debug.Log("Victory!");
             GameManager.Instance.ShowVictoryScreen();
         }
-        //body.AddForceAtPosition(-hit.normal * weight, hit.point);
     }
 
     /*private void OnCollisionEnter(Collision collision)
